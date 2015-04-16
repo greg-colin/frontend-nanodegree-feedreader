@@ -102,4 +102,36 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+    describe('new feed selection', function() {
+        var feedContents;
+
+        beforeEach(function(done) {
+            console.log('fired beforeeach');
+            loadFeed(1, done);
+            feedContents = $('.feed').html();
+            console.log('feed 0 contents');
+            console.log(feedContents);
+        });
+
+        it('changes the feed html', function(done) {
+            expect($('.feed').html()).not.toEqual(feedContents);
+            loadFeed(0, done);
+        });
+    });
+
+/*
+    describe('alternate new feed selection', function() {
+        var feedContents = 'dummy contents';
+        var feedId = 0;
+
+        allFeeds.forEach(function(feed) {
+            it('changes on ' + feedId, function(done) {
+                expect($('.feed').html()).not.toEqual(feedContents);
+                loadFeed(feedId, done);
+            });
+            feedId++;
+        });
+    });
+*/
 }());
