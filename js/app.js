@@ -1,12 +1,18 @@
-/* app.js
- *
- * This is our RSS feed reader application. It uses the Google
- * Feed Reader API to grab RSS feeds as JSON object we can make
- * use of. It also uses the Handlebars templating library and
- * jQuery.
+/**
+ @file app.js
+ @description This is our RSS feed reader application. It uses the Google
+ Feed Reader API to grab RSS feeds as JSON object we can make
+ use of. It also uses the Handlebars templating library and
+ jQuery.
+ @requires iJquery
+ @requires Google Feeds
  */
 
 // The names and URLs to all of the feeds we'd like available.
+/**
+ @constant {object[]} allFeeds
+ @description An array of "feed" objects that will be operated on by our program
+ */
 var allFeeds = [
     {
         name: 'Udacity Blog',
@@ -23,22 +29,27 @@ var allFeeds = [
     }
 ];
 
-/* This function starts up our application. The Google Feed
- * Reader API is loaded asynchonously and will then call this
- * function when the API is loaded.
+/**
+ @ function init
+ @description This function starts up our application. The Google Feed
+ Reader API is loaded asynchonously and will then call this
+ function when the API is loaded. Causes the first feed to be loaded.
  */
 function init() {
-    // Load the first feed we've defined (index of 0).
     loadFeed(0);
 }
 
-/* This function performs everything necessary to load a
- * feed using the Google Feed Reader API. It will then
- * perform all of the DOM operations required to display
- * feed entries on the page. Feeds are referenced by their
- * index position within the allFeeds array.
- * This function all supports a callback as the second parameter
- * which will be called after everything has run successfully.
+/**
+ @funcvtion loadFeed
+ @param {int} id - The index of the feed within our array
+ @paraam {function} cb
+ @description This function performs everything necessary to load a
+ feed using the Google Feed Reader API. It will then
+ perform all of the DOM operations required to display
+ feed entries on the page. Feeds are referenced by their
+ index position within the allFeeds array.
+ This function all supports a callback as the second parameter
+ which will be called after everything has run successfully.
  */
 function loadFeed(id, cb) {
     var feedUrl = allFeeds[id].url,
@@ -86,9 +97,11 @@ function loadFeed(id, cb) {
 google.load('feeds', '1');
 google.setOnLoadCallback(init);
 
-/* All of this functionality is heavily reliant upon the DOM, so we
- * place our code in the $() function to ensure it doesn't execute
- * until the DOM is ready.
+/**
+ @function anonymous function
+ @description All of this functionality is heavily reliant upon the DOM, so we
+ place our code in the $() function to ensure it doesn't execute
+ until the DOM is ready.
  */
 $(function() {
     var container = $('.feed'),
